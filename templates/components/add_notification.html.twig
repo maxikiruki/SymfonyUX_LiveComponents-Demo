@@ -1,0 +1,28 @@
+<form
+    {{ attributes }}
+    class="row gy-2 gx-3 align-items-center"
+    data-action="live#action"
+    data-action-name="prevent|add"
+>
+    <div class="col-auto">
+        <input
+            class="form-control"
+            type="text"
+            value="{{ message }}"
+            data-model="message"
+            data-action="live#updateDefer"
+            data-loading="delay|addAttribute(disabled)"
+        >
+    </div>
+    <div class="col-auto">
+        <button
+            class="btn btn-primary"
+        >
+            Add
+        </button>
+    </div>
+
+    {% if messageAdded %}
+        {{ component('alert', { message: 'Notification Added!' }) }}
+    {% endif %}
+</form>

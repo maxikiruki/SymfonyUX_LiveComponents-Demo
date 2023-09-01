@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Live Twig Demo!{% endblock %}
+
+{% block body %}
+    <h1>Twig & Live Component Examples</h1>
+    <hr>
+
+    <div class="row">
+    {% for example in get_examples() %}
+        <div class="col-4">
+            <a href="{{ path('app_example', {
+                example: example.componentName
+            }) }}" class="nav-link px-1 align-middle">
+                <div><code style="word-break: break-word">{{ example.shortClass }}</code></div>
+                {% if example.isLive %}
+                    <span class="badge bg-primary rounded-pill" title="This component updates as your interact with it!">LIVE</span>
+                {% endif %}
+
+                <small class="mb-1">{{ example.classSummary|raw }}</small>
+            </a>
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}

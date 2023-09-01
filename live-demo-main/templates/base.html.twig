@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+    </head>
+    <body>
+        <div class="row flex-nowrap">
+            <div class="col-auto col-3 bg-dark">
+                <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                    <a href="{{ path('app_homepage') }}" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                        <span class="fs-5 d-none d-sm-inline">Live Components</span>
+                    </a>
+                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+                        {% for example in get_examples() %}
+                            <li
+                                class="nav-item nav-item-example mb-2"
+                            >
+                                <a href="{{ path('app_example', {
+                                    example: example.componentName
+                                }) }}" class="nav-link px-1 align-middle">
+                                    <div><code style="word-break: break-word">{{ example.shortClass }}</code></div>
+                                    {% if example.isLive %}
+                                        <span class="badge bg-primary rounded-pill" title="This component updates as your interact with it!">LIVE</span>
+                                    {% endif %}
+
+                                    <small class="mb-1">{{ example.classSummary|raw }}</small>
+                                </a>
+                            </li>
+                        {% endfor %}
+                        <li
+                            class="nav-item nav-item-example mb-2"
+                        >
+                            <a href="{{ path('app_post_index') }}" class="nav-link px-1 align-middle">
+                                <div><code>Post Admin</code></div>
+
+                                <small class="mb-1">Admin CRUD that uses a component to render the form.</small>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col py-3">
+                {% for label, messages in app.flashes %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ label }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+
+                {% block body %}{% endblock %}
+            </div>
+        </div>
+    </body>
+</html>

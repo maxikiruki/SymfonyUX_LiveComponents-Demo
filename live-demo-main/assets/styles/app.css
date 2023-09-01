@@ -1,0 +1,18 @@
+@import "~bootstrap";
+@import '../../vendor/scrivo/highlight.php/styles/default.css';
+@import '../../vendor/scrivo/highlight.php/styles/night-owl.css';
+@import '~@fortawesome/fontawesome-free/css/all.css';
+
+.markdown-preview {
+    padding: 30px;
+    background-color: lightcyan;
+}
+.markdown-preview.bg-maroon {
+    background-color: #E8E0FF;
+}
+.low-opacity {
+    opacity: .2;
+}
+.nav-item-example a:hover {
+    background-color: #313539;
+}

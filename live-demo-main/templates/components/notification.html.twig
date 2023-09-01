@@ -1,0 +1,24 @@
+<div{{ attributes }}
+    data-poll
+>
+    Notifications ({{ this.notifications|length }})
+    <a
+        href="#"
+        class="btn btn-primary btn-sm"
+        data-action="live#action"
+        data-action-name="prevent|toggle"
+    >
+        {% if expanded %}Hide{% else %}Show{% endif %}
+    </a>
+    {% if expanded %}
+        {% if this.notifications|length %}
+            <ul>
+                {% for notification in this.notifications %}
+                    <li>{{ notification.message }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <div><em>No notifications.</em></div>
+        {% endif %}
+    {% endif %}
+</div>

@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Post index{% endblock %}
+
+{% block body %}
+    <h1>Post index</h1>
+
+    {{ component('alert', {
+        type: 'info',
+        message: 'This CRUD was generated with make:crud. The form uses the <code>post_form</code> component but submits to a normal controller.',
+        escape: false
+    }) }}
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Content</th>
+                <th>Slug</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for post in posts %}
+            <tr>
+                <td>{{ post.id }}</td>
+                <td>{{ post.title }}</td>
+                <td>{{ post.content }}</td>
+                <td>{{ post.slug }}</td>
+                <td>
+                    <div class="dropdown" {{ stimulus_controller('dropdown') }}>
+                        <button class="btn btn-secondary dropdown-toggle"
+                                type="button" id="dropdownMenuButton1"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                            Actions
+                        </button>
+                        <ul class="dropdown-menu"
+                            aria-labelledby="dropdownMenuButton1">
+                            <li>
+                                <a class="dropdown-item" href="{{ path('app_post_edit', {'id': post.id}) }}">Edit</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ path('app_post_sources_edit', {'id': post.id}) }}">Edit with "sources"</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ path('app_post_show', {'id': post.id}) }}">Show</a>
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_post_new') }}">Create new</a>
+{% endblock %}
